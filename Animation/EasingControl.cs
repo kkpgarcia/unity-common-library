@@ -44,62 +44,57 @@ namespace Common.Animation {
 		#endregion
 
 		#region Properties
-		public TimeType timeType = TimeType.Normal;
-		public PlayState playState { get; private set; }
-		public PlayState previousPlayState { get; private set; }
-		public EndBehaviour endBehaviour = EndBehaviour.Constant;
-		public LoopType loopType = LoopType.Repeat;
-		public bool IsPlaying { get { return playState == PlayState.Playing || playState == PlayState.Reversing; }}
+		public AnimationProperty Property = new AnimationProperty();
 
+		public EasingControl.PlayState playState { get; private set; }
+		public EasingControl.PlayState previousPlayState { get; private set; }
+
+		public bool IsPlaying { get { return playState == PlayState.Playing || playState == PlayState.Reversing; }}
 		public float startValue = 0.0f;
 		public float endValue = 1.0f;
-		public float duration = 1.0f;
-		public int loopCount = 0;
-		public TweenEquation equation = EasingEquations.Linear;
 
 		public float currentTime { get; private set; }
 		public float currentValue { get; private set; }
 		public float currentOffset { get; private set; }
 		public int loops { get; private set; }
 		
-		public AnimationCurve curve;
-		public bool useAnimationCurve = false;
+
 		#endregion
 
 		#region Query
 		public EasingControl SetTimeType(TimeType type) {
-			this.timeType = type;
+			this.Property.timeType = type;
 			return this;
 		}
 
 		public EasingControl SetLoopType(LoopType type) {
-			this.loopType = type;
+			this.Property.loopType = type;
 			return this;
 		}
 
 		public EasingControl SetLoopCount(int loopCount) {
-			this.loops = loopCount;
+			this.Property.loopCount = loopCount;
 			return this;
 		}
 
 		public EasingControl SetAnimationCurve(AnimationCurve curve) {
-			this.curve = curve;
-			useAnimationCurve = this.curve != null;
+			this.Property.curve = curve;
+			Property.useAnimationCurve = this.Property.curve != null;
 			return this;
 		}
 
 		public EasingControl SetEndBehaviour(EndBehaviour behaviour) {
-			this.endBehaviour = behaviour;
+			this.Property.endBehaviour = behaviour;
 			return this;
 		}
 
 		public EasingControl SetEquation(TweenEquation eq) {
-			this.equation = eq;
+			this.Property.equation = eq;
 			return this;
 		}
 
 		public EasingControl SetDuration(float duration) {
-			this.duration = duration;
+			this.Property.duration = duration;
 			return this;
 		}
 
@@ -165,13 +160,13 @@ namespace Common.Animation {
 			SetPlayState(PlayState.Stopped);
 			previousPlayState = PlayState.Stopped;
 			loops = 0;
-			if (endBehaviour == EndBehaviour.Reset)
+			if (Property.endBehaviour == EndBehaviour.Reset)
 				SeekToBeginning ();
 		}
 		
 		public void SeekToTime (float time)
 		{
-			currentTime = Mathf.Clamp01(time / duration);
+			currentTime = Mathf.Clamp01(time / Property.duration);
 			float newValue = (endValue - startValue) * currentTime + startValue;
 			currentOffset = newValue - currentValue;
 			currentValue = newValue;
@@ -185,7 +180,7 @@ namespace Common.Animation {
 		
 		public void SeekToEnd ()
 		{
-			SeekToTime(duration);
+			SeekToTime(Property.duration);
 		}
 		#endregion
 
@@ -241,7 +236,7 @@ namespace Common.Animation {
 		{
 			while (true)
 			{
-				switch (timeType)
+				switch (Property.timeType)
 				{
 				case TimeType.Normal:
 					yield return new WaitForEndOfFrame();
@@ -264,16 +259,16 @@ namespace Common.Animation {
 			bool finished = false;
 			if (playState == PlayState.Playing)
 			{
-				currentTime = Mathf.Clamp01( currentTime + (time / duration));
+				currentTime = Mathf.Clamp01( currentTime + (time / Property.duration));
 				finished = Mathf.Approximately(currentTime, 1.0f);
 			}
 			else // Reversing
 			{
-				currentTime = Mathf.Clamp01( currentTime - (time / duration));
+				currentTime = Mathf.Clamp01( currentTime - (time / Property.duration));
 				finished = Mathf.Approximately(currentTime, 0.0f);
 			}
 
-			float equationValue = useAnimationCurve ? curve.Evaluate(currentTime) : equation (0.0f, 1.0f, currentTime);
+			float equationValue = Property.useAnimationCurve ? Property.curve.Evaluate(currentTime) : Property.equation (0.0f, 1.0f, currentTime);
 
 			float frameValue = (endValue - startValue) * equationValue + startValue;
 			currentOffset = frameValue - currentValue;
@@ -283,9 +278,9 @@ namespace Common.Animation {
 			if (finished)
 			{
 				++loops;
-				if (loopCount < 0 || loopCount >= loops) 
+				if (Property.loopCount < 0 || Property.loopCount >= loops) 
 				{
-					if (loopType == LoopType.Repeat) 
+					if (Property.loopType == LoopType.Repeat) 
 						SeekToBeginning();
 					else // PingPong
 						SetPlayState( playState == PlayState.Playing ? PlayState.Reversing : PlayState.Playing );

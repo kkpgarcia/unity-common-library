@@ -20,8 +20,8 @@ namespace Common.Animation {
 			RectTransformAnchorPositionTweener tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener> ();
 			tweener.StartTweenValue = t.anchoredPosition;
 			tweener.EndTweenValue = position;
-			tweener.duration = duration;
-			tweener.equation = equation;
+			tweener.Property.duration = duration;
+			tweener.Property.equation = equation;
 			tweener.Play ();
 			return tweener;
 		}

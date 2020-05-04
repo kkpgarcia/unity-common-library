@@ -21,8 +21,8 @@ namespace Common.Animation {
 			tweener.Source = s;
 			tweener.startValue = s.volume;
 			tweener.endValue = volume;
-			tweener.duration = duration;
-			tweener.equation = equation;
+			tweener.Property.duration = duration;
+			tweener.Property.equation = equation;
 			tweener.Play ();
 			return tweener;
 		}
