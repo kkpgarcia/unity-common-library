@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Common.Animation;
 
@@ -27,9 +28,15 @@ namespace Common.UI {
 			MyRectTransform.anchoredPosition = AnchorPosition(myAnchor, parentAnchor, offset);
 		}
 
+		[ObsoleteAttribute]
 		public Tweener MoveToAnchorPosition (TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset)
 		{
 			return MyRectTransform.AnchorTo(AnchorPosition(myAnchor, parentAnchor, offset));
+		}
+
+		public Tweener MoveToAnchorPosition (TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset, RectTransformAnimationProperty property) {
+			property.Offset = AnchorPosition(myAnchor, parentAnchor, offset);
+			return MyRectTransform.AnchorTo(property);
 		}
 
 		public Vector2 AnchorPosition (TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset)

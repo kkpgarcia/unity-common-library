@@ -17,11 +17,18 @@ namespace Common.Animation {
 		
 		public static Tweener AnchorTo (this RectTransform t, Vector3 position, float duration, Func<float, float, float, float> equation)
 		{
+			return AnchorTo(t, new RectTransformAnimationProperty() {
+				Offset = position,
+				duration = duration,
+				equation = equation,
+			});
+		}
+
+		public static Tweener AnchorTo(this RectTransform t, RectTransformAnimationProperty property) {
 			RectTransformAnchorPositionTweener tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener> ();
+			tweener.Property = property;
 			tweener.StartTweenValue = t.anchoredPosition;
-			tweener.EndTweenValue = position;
-			tweener.Property.duration = duration;
-			tweener.Property.equation = equation;
+			tweener.EndTweenValue = property.Offset;
 			tweener.Play ();
 			return tweener;
 		}

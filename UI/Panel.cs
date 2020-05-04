@@ -15,7 +15,7 @@ namespace Common.UI {
 			public string Name;
 			public TextAnchor MyAnchor;
 			public TextAnchor ParentAnchor;
-			public Vector2 Offset;
+			public RectTransformAnimationProperty AnimationProperty = new RectTransformAnimationProperty();
 			
 			public Position (string name)
 			{
@@ -30,7 +30,7 @@ namespace Common.UI {
 			
 			public Position (string name, TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset) : this(name, myAnchor, parentAnchor)
 			{
-				this.Offset = offset;
+				this.AnimationProperty.Offset = offset;
 			}
 		}
 		#endregion
@@ -83,7 +83,7 @@ namespace Common.UI {
 				positionMap.Remove(p.Name);
 		}
 
-		public Tweener SetPosition (string positionName, bool animated)
+		public Tweener SetPosition (string positionName, bool animated = true)
 		{
 			return SetPosition(this[positionName], animated);
 		}
@@ -99,12 +99,12 @@ namespace Common.UI {
 			
 			if (animated)
 			{
-				Transition = anchor.MoveToAnchorPosition(p.MyAnchor, p.ParentAnchor, p.Offset);
+				Transition = anchor.MoveToAnchorPosition(p.MyAnchor, p.ParentAnchor, p.AnimationProperty.Offset, p.AnimationProperty);
 				return Transition;
 			}
 			else
 			{
-				anchor.SnapToAnchorPosition(p.MyAnchor, p.ParentAnchor, p.Offset);
+				anchor.SnapToAnchorPosition(p.MyAnchor, p.ParentAnchor, p.AnimationProperty.Offset);
 				return null;
 			}
 		}
