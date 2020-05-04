@@ -1,15 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿/*
+Author: Kyle Garcia
+Date Created: 2016
+Last Updated: 2020
+*/
 
-using StrangeView = strange.extensions.mediation.impl.View;
-using strange.extensions.signal.impl;
+using UnityEngine;
+using System.Collections.Generic;
+using Common.Singleton;
 
 namespace Common.ObjectPool
 {
-	public class ObjectPool : StrangeView
+	public class ObjectPool : PermanentMonoSingleton<ObjectPool>
 	{
-		public static ObjectPool instance;
 
 		public GameObject[] objectPrefabs;
 		public List<GameObject>[] pooledObjects;
@@ -19,15 +21,7 @@ namespace Common.ObjectPool
 
 		protected GameObject objectContainer;
 
-		public Signal<GameObject> ReturnObjectinPoolSignal = new Signal<GameObject> ();
-
-		protected override void Awake ()
-		{
-			base.Awake ();
-			instance = this;
-		}
-
-		protected override void Start ()
+		private void Start ()
 		{
 			objectContainer = this.gameObject;
 

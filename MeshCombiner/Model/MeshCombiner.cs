@@ -1,14 +1,24 @@
-﻿using UnityEngine;
+﻿/*
+Author: Kyle Garcia
+Date Created: 2016
+Last Updated: 2016
+
+NOTE:
+
+This library is outdated and was only used for Unity 5 and with StrangeIoC
+implementation. This should not be used for production use.
+*/
+
+/*
+using UnityEngine;
 using System.Collections;
 
-using Hopico.Game.Model;
 
 namespace Common.MeshCombiner
 {
 	public class MeshCombiner : IMeshCombiner
 	{
-		[Inject]
-		public IMaterialManager MaterialManager { get; set; }
+		public IMaterialManager MaterialManager;
 
 		public void CombineObjects (MeshFilter[] meshFilters, GameObject obj, bool mergeSubMeshes = true, bool useMatrices = true)
 		{
@@ -50,4 +60,4 @@ namespace Common.MeshCombiner
 
 		}
 	}
-}
+}*/

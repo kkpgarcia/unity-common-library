@@ -1,9 +1,18 @@
-﻿using System;
+﻿/*
+Author: Kyle Garcia
+Date Created: 2016
+Last Updated: 2016
+
+NOTE:
+
+This library is outdated and was only used for Unity 5 and with StrangeIoC
+implementation. This should not be used for production use.
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

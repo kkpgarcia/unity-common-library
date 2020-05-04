@@ -1,8 +1,30 @@
-﻿using UnityEngine;
+﻿/*
+Author: Kyle Garcia
+Date Created: 2016
+Last Updated: 2016
+
+NOTE:
+
+This library is outdated and was only used for Unity 5 and with StrangeIoC
+implementation. This should not be used for production use.
+*/
+
+/*
+Author: Kyle Garcia
+Date Created: 2016
+Last Updated: 2016
+
+NOTE:
+
+This library is outdated and was only used for Unity 5 and with StrangeIoC
+implementation. This should not be used for production use.
+*/
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace Digify.Debugging
+namespace Common.Debugging
 {
 	public class FPSCounter : MonoBehaviour
 	{

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System;
 
-using strange.extensions.context.impl;
-
 namespace Common.Singleton
 {
 	public abstract class MonoSingletonBase : MonoBehaviour
@@ -132,18 +130,6 @@ namespace Common.Singleton
 		{
 			if (!SingletonManager.HasInstance && !IsPermanent)
 				Dispose ();
-		}
-	}
-
-	public class InjectableMonoSingleton<T> : MonoSingleton<T> where T: InjectableMonoSingleton<T>
-	{
-		public override bool Init ()
-		{
-			ContextView contextView = GameObject.FindObjectOfType<ContextView> ();
-			MVCSContext context = (MVCSContext)contextView.context;
-			context.injectionBinder.injector.Inject (this, false);
-
-			return base.Init ();
 		}
 	}
 
