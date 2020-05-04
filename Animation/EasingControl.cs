@@ -256,6 +256,9 @@ namespace Common.Animation {
 
 		void Tick (float time)
 		{
+			if(!Property.Simulate)
+				return;
+
 			bool finished = false;
 			if (playState == PlayState.Playing)
 			{
