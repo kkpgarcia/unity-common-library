@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 
+using TweenEquation = System.Func<float, float, float, float>;
+
 namespace Common.Animation {
 	public class EasingControl : MonoBehaviour 
 	{
@@ -53,7 +55,7 @@ namespace Common.Animation {
 		public float endValue = 1.0f;
 		public float duration = 1.0f;
 		public int loopCount = 0;
-		public Func<float, float, float, float> equation = EasingEquations.Linear;
+		public TweenEquation equation = EasingEquations.Linear;
 
 		public float currentTime { get; private set; }
 		public float currentValue { get; private set; }
@@ -65,8 +67,59 @@ namespace Common.Animation {
 		#endregion
 
 		#region Query
-		public EasingControl SetTypeType(TimeType type) {
+		public EasingControl SetTimeType(TimeType type) {
 			this.timeType = type;
+			return this;
+		}
+
+		public EasingControl SetLoopType(LoopType type) {
+			this.loopType = type;
+			return this;
+		}
+
+		public EasingControl SetLoopCount(int loopCount) {
+			this.loops = loopCount;
+			return this;
+		}
+
+		public EasingControl SetAnimationCurve(AnimationCurve curve) {
+			this.curve = curve;
+			useAnimationCurve = this.curve != null;
+			return this;
+		}
+
+		public EasingControl SetEndBehaviour(EndBehaviour behaviour) {
+			this.endBehaviour = behaviour;
+			return this;
+		}
+
+		public EasingControl SetEquation(TweenEquation eq) {
+			this.equation = eq;
+			return this;
+		}
+
+		public EasingControl SetDuration(float duration) {
+			this.duration = duration;
+			return this;
+		}
+
+		public EasingControl SetOnLoopEvent(EventHandler action) {
+			this.StateChangeEvent += action;
+			return this;
+		}
+
+		public EasingControl SetOnChangeEvent(EventHandler action) {
+			this.StateChangeEvent += action;
+			return this;
+		}
+
+		public EasingControl SetOnUpdate(EventHandler action) {
+			this.UpdateEvent += action;
+			return this;
+		}
+
+		public EasingControl SetOnFinish(EventHandler action) {
+			this.CompletedEvent += action;
 			return this;
 		}
 

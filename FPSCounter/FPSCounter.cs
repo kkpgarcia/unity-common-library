@@ -38,7 +38,6 @@ namespace Common.Debugging
 		private void Start ()
 		{
 			StartCoroutine (UpdateRoutine ());
-			//Application.targetFrameRate = 60;
 		}
 
 		IEnumerator UpdateRoutine ()
