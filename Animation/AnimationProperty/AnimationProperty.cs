@@ -4,21 +4,6 @@ using TweenEquation = System.Func<float, float, float, float>;
 namespace Common.Animation {
     [System.Serializable]
     public class AnimationProperty {
-        #region Equation Enumerations
-        public enum Equation {
-            LINEAR, SPRING, 
-            EASE_IN_QUAD, EASE_OUT_QUAD, EASE_IN_OUT_QUAD,
-            EASE_IN_CUBIC, EASE_OUT_CUBIC, EASE_IN_OUT_CUBIC,
-            EASE_IN_QUART, EASE_OUT_QUART, EASE_IN_OUT_QUART,
-            EASE_IN_QUINT, EASE_OUT_QUINT, EASE_IN_OUT_QUINT,
-            EASE_IN_SINE, EASE_OUT_SINE, EASE_IN_OUT_SINE,
-            EASE_IN_EXPO, EASE_OUT_EXPO, EASE_IN_OUT_EXPO,
-            EASE_IN_CIRC, EASE_OUT_CIRC, EASE_IN_OUT_CIRC,
-            EASE_IN_BOUNCE, EASE_OUT_BOUNCE, EASE_IN_OUT_BOUNCE,
-            EASE_IN_BACK, EASE_OUT_BACK, EASE_IN_OUT_BACK,
-            EASE_IN_ELASTIC, EASE_OUT_ELASTIC, EASE_IN_OUT_ELASTIC,
-        }
-        #endregion
         public bool Simulate = true;
         public Equation TweenEquation = Equation.LINEAR;
         public EasingControl.TimeType timeType = EasingControl.TimeType.Normal;
@@ -28,6 +13,23 @@ namespace Common.Animation {
         public int loopCount = 0;
         public AnimationCurve curve;
 		public bool useAnimationCurve = false;
+
+        public AnimationProperty() {}
+
+        public AnimationProperty(bool simulate, Equation eq, EasingControl.TimeType timeType, EasingControl.EndBehaviour endBehaviour, 
+                                EasingControl.LoopType loopType, float duration, int loopCount, AnimationCurve curve, bool useAnimationCurve) {
+
+            this.Simulate = simulate;
+            this.TweenEquation = eq;
+            this.timeType = timeType;
+            this.endBehaviour = endBehaviour;
+            this.loopCount = loopCount;
+            this.loopType = loopType;
+            this.duration = duration;
+            this.curve = curve;
+            this.useAnimationCurve = useAnimationCurve;
+        }
+
         private TweenEquation m_equation;
 		public TweenEquation equation {
             get {

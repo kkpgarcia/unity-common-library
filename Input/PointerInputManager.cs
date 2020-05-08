@@ -21,8 +21,14 @@ namespace Common.Input {
         protected virtual void Awake() {
             m_Controls = new PointerControls();
 
+            //This needs to regester on the pointer control itself.
+            //Temporary solution for registering binding composites.
+            InputSystem.RegisterBindingComposite<PointerInputComposite>();
+            
             m_Controls.pointer.point.performed += OnAction;
             m_Controls.pointer.point.canceled += OnAction;
+
+            SyncBindingMask();
         }
 
         protected virtual void OnEnable()

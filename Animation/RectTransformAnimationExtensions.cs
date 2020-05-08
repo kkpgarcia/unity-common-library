@@ -26,6 +26,11 @@ namespace Common.Animation {
 
 		public static Tweener AnchorTo(this RectTransform t, RectTransformAnimationProperty property) {
 			RectTransformAnchorPositionTweener tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener> ();
+
+			//Temporary Boxing and Unboxing of reference types
+			
+			//Vector2 offset = (Vector2)boxedOffset;
+
 			tweener.Property = property;
 			tweener.StartTweenValue = t.anchoredPosition;
 			tweener.EndTweenValue = property.Offset;

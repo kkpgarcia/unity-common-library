@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Common.Input {
     public struct SwipeInput {
         public readonly int InputId;
+        public readonly Vector2 CurrentPosition;
         public readonly Vector2 StartPosition;
         public readonly Vector2 PreviousPosition;
         public readonly Vector2 EndPosition;
@@ -21,6 +22,7 @@ namespace Common.Input {
             SwipeDuration = gesture.EndTime - gesture.StartTime;
             TravelDistance = gesture.TravelDistance;
             SwipeSameness = gesture.SwipeDirectionSameness;
+            CurrentPosition = gesture.CurrentPosition;
 
             if (SwipeDuration > 0.0f)
                 SwipeVelocity = (float)(TravelDistance / SwipeDuration);

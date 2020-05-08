@@ -35,8 +35,21 @@ namespace Common.UI {
 		}
 
 		public Tweener MoveToAnchorPosition (TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset, RectTransformAnimationProperty property) {
-			property.Offset = AnchorPosition(myAnchor, parentAnchor, offset);
-			return MyRectTransform.AnchorTo(property);
+			RectTransformAnimationProperty u_property = new RectTransformAnimationProperty(
+				property.Offset,
+				property.Simulate,
+				property.TweenEquation,
+				property.timeType,
+				property.endBehaviour,
+				property.loopType,
+				property.duration,
+				property.loopCount,
+				property.curve,
+				property.useAnimationCurve
+			);
+			
+			u_property.Offset = AnchorPosition(myAnchor, parentAnchor, u_property.Offset);
+			return MyRectTransform.AnchorTo(u_property);
 		}
 
 		public Vector2 AnchorPosition (TextAnchor myAnchor, TextAnchor parentAnchor, Vector2 offset)

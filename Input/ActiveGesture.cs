@@ -9,6 +9,7 @@ namespace Common.Input {
         public readonly Vector2 StartPosition;
         public Vector2 PreviousPosition;
         public Vector2 EndPosition;
+        public Vector2 CurrentPosition;
         public int Samples;
         public float SwipeDirectionSameness;
         public float TravelDistance;
@@ -24,6 +25,7 @@ namespace Common.Input {
         }
 
         public void SubmitPoint(Vector2 position, double time) {
+            CurrentPosition = position;
             Vector2 toNewPosition = position - EndPosition;
             float distanceMoved = toNewPosition.magnitude;
 

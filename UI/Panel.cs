@@ -15,7 +15,7 @@ namespace Common.UI {
 			public string Name;
 			public TextAnchor MyAnchor;
 			public TextAnchor ParentAnchor;
-			public RectTransformAnimationProperty AnimationProperty = new RectTransformAnimationProperty();
+			public RectTransformAnimationProperty AnimationProperty;
 			
 			public Position (string name)
 			{

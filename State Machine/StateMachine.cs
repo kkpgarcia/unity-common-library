@@ -42,5 +42,10 @@ namespace Common.StateMachines {
 			
 			inTransition = false;
 		}
+
+		public void Update() {
+			if(currentState != null)
+				currentState.OnUpdate();
+		}
 	}
 }

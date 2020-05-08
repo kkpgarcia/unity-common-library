@@ -14,6 +14,8 @@ namespace Common.StateMachines {
 			RemoveListeners();
 		}
 
+		public virtual void OnUpdate() {}
+
 		protected virtual void OnDestroy ()
 		{
 			RemoveListeners();
