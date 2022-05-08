@@ -118,7 +118,7 @@ namespace Common.Line.LineEditor
 				size *= 2f;
 			}
 			Handles.color = modeColors [(int)spline.GetControlPointMode (index)];
-			if (Handles.Button (point, handleRotation, size * handleSize, size * pickSize, Handles.DotCap)) {
+			if (Handles.Button (point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap)) {
 				selectedIndex = index;
 				Repaint ();
 			}
